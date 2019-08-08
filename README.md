@@ -1,65 +1,79 @@
-# Laravel-Vue SPA 
+# Noni Full Stack Developer Coding Challenge
 
-<a href="https://travis-ci.org/cretueusebiu/laravel-vue-spa"><img src="https://travis-ci.org/cretueusebiu/laravel-vue-spa.svg?branch=master" alt="Build Status"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/v/stable.svg" alt="Latest Stable Version"></a>
+## Objective
 
-> A Laravel-Vue SPA starter project template.
+To create a note taking app using Laravel and VueJS.
 
-<p align="center">
-<img src="https://i.imgur.com/NHFTsGt.png">
-</p>
+## Insructions
 
-## Features
+You are going to use a pre-configured dockerized application to create a simple CRUD application. Laravel is used on the back-end Vuejs is used on the front end as a SPA.
 
-- Laravel 5.8 
-- Vue + VueRouter + Vuex + VueI18n + ESlint
-- Pages with dynamic import and custom layouts
-- Login, register, email verification and password reset
-- Authentication with JWT
-- Socialite integration
-- Bootstrap 4 + Font Awesome 5
+_Note: There is already JWT authentication implemented for the app._
 
-## Installation
+**TODO:** The application should allow you to create, edit, and delete delete notes. Notes will be save to the database. Notes will have a title, content, and created_at displayed on the front end.
 
-- `composer create-project --prefer-dist cretueusebiu/laravel-vue-spa`
-- Edit `.env` and set your database connection details
-- (When installed via git clone or download, run `php artisan key:generate` and `php artisan jwt:secret`)
-- `php artisan migrate`
-- `npm install`
+1.  Save the created notes in the database
+2.  Create the necessary table with Laravel migrations
+3.  Related any created notes to the authenticated user that created it
+4.  Created all require restful routes to achieve the CRUD functionality
+5.  Created required Front End components to access the API you created
+6.  Authenticated user needs to be able to view all notes, create new notes, edit existing notes, and delete notes.
 
-## Usage
+Feel free to use your creativity and design skills to make the existing site design your own.
 
-#### Development
+## Setup
 
-```bash
-# build and watch
+The project comes with a dockerized development environment and should include everything you need to get working right away.
+
+This setup requires that you have docker and docker-compose installed on your system.
+
+**Docker installation instructions here:**
+[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+
+**Copy Laravel environment file**
+(While in project root)
+
+```
+cp .env.example .env
+```
+
+**Copy Laradock environment files**
+
+```
+cd laradock
+
+cp env-example .env
+```
+
+**Run docker containers**
+
+```
+docker-compose up -d nginx mysql phpmyadmin redis workspace
+```
+
+**Enter workspace container**
+
+```
+docker-compose exec --user=laradock workspace bash
+```
+
+**Install dependencies and build existing database**
+
+```
+composer install
+npm install
+php artisan key:generate
+php artisan migrate
+```
+
+**Build app**
+
+```
 npm run watch
-
-# serve with hot reloading
-npm run hot
 ```
 
-#### Production
+The application should now be available at http://localhost
 
-```bash
-npm run production
-```
+## Submission
 
-## Socialite
-
-This project comes with GitHub as an example for [Laravel Socialite](https://laravel.com/docs/5.8/socialite).
-
-To enable the provider create a new GitHub application and use `https://example.com/api/oauth/github/callback` as the Authorization callback URL.
-
-Edit `.env` and set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` with the keys form your GitHub application.
-
-For other providers you may need to set the appropriate keys in `config/services.php` and redirect url in `OAuthController.php`.
-
-## Email Verification
-
-To enable email verification make sure that your `App\User` model implements the `Illuminate\Contracts\Auth\MustVerifyEmail` contract.
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Create a ZIP file from your project solution(excluding node_modules & vendor folders). Email it to [dev@nonibrands.com](dev@nonibrands.com).
