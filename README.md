@@ -19,6 +19,7 @@ _Note: There is already JWT authentication implemented for the app._
 5.  Created required Front End components to access the API you created
 6.  Authenticated user needs to be able to view all notes, create new notes, edit existing notes, and delete notes.
 
+Include front-end and bak-end validation. Additional marks will be given for UX/design.
 Feel free to use your creativity and design skills to make the existing site design your own.
 
 ## Setup
