@@ -34,7 +34,7 @@ Coding Style: Out of 10
 Testing: Out of 5
 
 
-Include front-end and bak-end validation. Additional marks will be given for UX/design.
+Include front-end and back-end validation.
 Feel free to use your creativity and design skills to make the existing site design your own.
 
 ## Setup
