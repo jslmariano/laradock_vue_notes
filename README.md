@@ -22,11 +22,17 @@ _Note: There is already JWT authentication implemented for the app._
 ## Grading Scheme
 
 Functionality: Out of 10
+
 UX/Design: Out of 10
+
 DB Design: Out of 5
+
 Validation: Out of 10
+
 Coding Style: Out of 10
+
 Testing: Out of 5
+
 
 Include front-end and bak-end validation. Additional marks will be given for UX/design.
 Feel free to use your creativity and design skills to make the existing site design your own.
