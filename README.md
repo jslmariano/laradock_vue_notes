@@ -77,7 +77,8 @@ docker-compose exec --user=laradock workspace bash
 
 ```
 composer install
-npm install
+npm install --no-bin-links
+npm install cross-env --no-bin-links
 php artisan key:generate
 php artisan migrate
 ```
