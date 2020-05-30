@@ -203,4 +203,13 @@ class AiodinFunctionTest extends TestCase
         $this->assertEquals(9, $result['most_count']);
     }
 
+    /**
+     * Test for solution 4
+     * @return void
+     */
+    public function testSolution5()
+    {
+        $this->assertTrue(true);
+    }
+
 }

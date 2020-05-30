@@ -42,6 +42,12 @@ cd /var/www/html/ ( <-- Your Projecy Root)
 
 ```
 
+**Focus of scripts**
+```
+SOLUTIONS : packages\jslmariano\aiodin\src\Models\Solutions.php
+UNITTEST  : packages\jslmariano\aiodin\tests\AiodinFunctionTest.php
+```
+
 **Copy Laravel environment file**
 (While in project root)
 

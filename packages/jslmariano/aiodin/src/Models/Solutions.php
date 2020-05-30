@@ -220,8 +220,6 @@ class Solutions
         $result['least_characters'] = $least_characters;
         $result['biggest_least_character'] = max($least_characters);
 
-        print_r($result);
-
         return $result;
     }
 }
