@@ -76,7 +76,11 @@ docker-compose exec --user=laradock workspace bash
 **Install dependencies and build existing database**
 
 ```
+rm -rf vendor
+rm -rf composer.lock
 composer install
+composer dump-autoload
+php artisan vendor:publish --tag="jslmariano\notelist\Providers\NotesServiceProvider"
 npm install --no-bin-links
 npm install cross-env --no-bin-links
 php artisan key:generate
@@ -88,6 +92,20 @@ php artisan migrate
 ```
 npm run watch
 ```
+
+**Refresh jslmariano/notelist package after code modifications**
+
+```
+rm -rf vendor/jslmariano
+composer update jslmariano/notelist
+```
+
+**Testing the custom package**
+
+```
+phpunit  packages/jslmariano/notelist
+```
+
 
 The application should now be available at http://localhost
 

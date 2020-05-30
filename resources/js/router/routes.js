@@ -65,7 +65,21 @@ export default [{
       }
     ]
   },
-
+  {
+    path: '/notes',
+    name: 'notes',
+    component: page('notes/index.vue'),
+  },
+  {
+    path: '/note/create',
+    name: 'note.create',
+    component: page('notes/create.vue'),
+  },
+  {
+    path: '/note/edit/:id',
+    name: 'note.edit',
+    component: page('notes/edit.vue'),
+  },
   {
     path: '*',
     component: page('errors/404.vue')
