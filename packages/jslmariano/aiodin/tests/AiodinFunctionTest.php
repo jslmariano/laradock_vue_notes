@@ -205,10 +205,14 @@ class AiodinFunctionTest extends TestCase
 
     /**
      * Test for solution 4
+     * (UNFINISHED)
      * @return void
      */
     public function testSolution5()
     {
+        $market_data = array(100, 80, 50, 145, 500, 400, 300, 10, 55, 40, 15, 80, 90);
+        $result = $this->solution->createProfit($market_data);
+
         $this->assertTrue(true);
     }
 

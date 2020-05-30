@@ -222,4 +222,25 @@ class Solutions
 
         return $result;
     }
+
+
+    /**
+     * (UNFINISHED)
+     * Creates a profit.
+     *
+     * @param      array   $market_datas  The market datas
+     *
+     * @return     array  profit instructions
+     */
+    public function createProfit($market_datas = array())
+    {
+        $anticipation_range = 3;
+        $has_bought = false;
+
+        for ($i = 0; $i < count($market_datas); $i++) {
+            print_r($market_datas[$i]);
+        }
+
+        return array();
+    }
 }
