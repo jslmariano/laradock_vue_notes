@@ -37,7 +37,7 @@ This setup requires that you have docker and docker-compose installed on your sy
 
 **Extract laravel aiodin** (as your project root)
 ```
-tar -xvf laravel_aiodin.tar -C /var/www/html/
+unzip laradock-develop_aiodin.zip -d /var/www/html/
 cd /var/www/html/ ( <-- Your Projecy Root)
 
 ```
