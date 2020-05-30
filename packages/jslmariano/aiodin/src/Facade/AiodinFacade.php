@@ -1,12 +1,11 @@
 <?php
-namespace Jslmariano\Notelist\Facade;
+namespace Jslmariano\Aiodin\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
-class NotelistFacade extends Facade
+class AiodinFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'notelist';
-    }
+        return 'aiodin';
 }

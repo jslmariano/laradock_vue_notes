@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "286f2ef8e75af6f97ac975dfdaf1428f",
+    "content-hash": "cda79d1853751e378d0e1591c6e6dcae",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -669,49 +669,6 @@
             "description": "Highlight PHP code in terminal",
             "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
-        },
-        {
-            "name": "jslmariano/notelist",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./packages/jslmariano/notelist",
-                "reference": "f5697b628ce7f5c6d496b6350dd6ff64ad78b43f"
-            },
-            "require-dev": {
-                "laravel/laravel": "dev-develop",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Jslmariano\\Notelist\\Providers\\NotesServiceProvider",
-                        "Jslmariano\\Notelist\\Providers\\NoteRoutesProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jslmariano\\Notelist\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Josel Mariano",
-                    "email": "jslmariano@gmail.com"
-                }
-            ],
-            "description": "You can create a list of your notes.",
-            "transport-options": {
-                "symlink": false
-            }
         },
         {
             "name": "laravel/dusk",
@@ -4399,6 +4356,43 @@
             "time": "2016-01-20T08:20:44+00:00"
         },
         {
+            "name": "jslmariano/aiodin",
+            "version": "dev-develop_aiodin",
+            "dist": {
+                "type": "path",
+                "url": "./packages/jslmariano/aiodin",
+                "reference": "0e4b1d89d48ed8894176a73035bc27d7d8d242bc"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jslmariano\\Aiodin\\Providers\\AiodinServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jslmariano\\Aiodin\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Josel Mariano",
+                    "email": "jslmariano@gmail.com"
+                }
+            ],
+            "description": "Just a set of APIS showing solutions from th requirments",
+            "transport-options": {
+                "symlink": false
+            }
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.3.1",
             "source": {
@@ -5997,7 +5991,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jslmariano/notelist": 20
+        "jslmariano/aiodin": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Jslmariano Notelists Test Suite">
+        <testsuite name="Jslmariano Aiodin Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

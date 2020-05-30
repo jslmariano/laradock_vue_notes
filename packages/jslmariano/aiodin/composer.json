@@ -1,0 +1,30 @@
+{
+    "name": "jslmariano/aiodin",
+    "description": "Just a set of APIS showing solutions from th requirments",
+    "authors": [
+        {
+            "name": "Josel Mariano",
+            "email": "jslmariano@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jslmariano\\Aiodin\\Providers\\AiodinServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Jslmariano\\Aiodin\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    }
+}

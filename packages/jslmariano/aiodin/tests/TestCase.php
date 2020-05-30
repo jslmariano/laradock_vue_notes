@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Jslmariano\Notelist\NotelistFacade;
-use Jslmariano\Notelist\NotesServiceProvider;
+use Jslmariano\Aiodin\AiodinFacade;
+use Jslmariano\Aiodin\AiodinServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
@@ -11,11 +11,11 @@ class TestCase extends OrchestraTestCase
     /**
      * Load package service provider
      * @param  \Illuminate\Foundation\Application $app
-     * @return Jslmariano\MyPackage\NotesServiceProvider
+     * @return Jslmariano\Aiodin\AiodinServiceProvider
      */
     protected function getPackageProviders($app)
     {
-        return [NotesServiceProvider::class];
+        return [AiodinServiceProvider::class];
     }
 
     /**
@@ -26,7 +26,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Notelist' => NotelistFacade::class,
+            'Aiodin' => AiodinFacade::class,
         ];
     }
 }
