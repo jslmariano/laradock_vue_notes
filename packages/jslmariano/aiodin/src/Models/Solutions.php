@@ -2,9 +2,19 @@
 
 namespace Jslmariano\Aiodin\Models;
 
+/**
+ * This class describes solutions.
+ */
 class Solutions
 {
 
+    /**
+     * Validate array if valid numbers, raise if one is not
+     *
+     * @param      array                      $numbers  The numbers
+     *
+     * @throws     \InvalidArgumentException  Invalid number
+     */
     protected function _validateNumbers($numbers = array())
     {
         foreach($numbers as $value){
@@ -19,6 +29,13 @@ class Solutions
         }
     }
 
+    /**
+     * Validate array if odd numbers, raise if one is not
+     *
+     * @param      array                      $numbers  The numbers
+     *
+     * @throws     \InvalidArgumentException  Invalid odd number
+     */
     protected function _validateOddNumbers($numbers = array())
     {
         foreach($numbers as $value){
@@ -33,7 +50,15 @@ class Solutions
         }
     }
 
-    // solution 1
+    /**
+     * Solution 2
+     *
+     * Get all missing numbers inside the array, from 1..N
+     *
+     * @param      array  $groups  The groups
+     *
+     * @return     array  The loners.
+     */
     public function countBinaryGap($n = 0)
     {
         if (!is_numeric($n)) {
@@ -62,8 +87,17 @@ class Solutions
         return (int) $max_zeros;
     }
 
-    // solution 2
-    public function findMissingLink($suspect = array())
+    /**
+     * Solution 2
+     *
+     * Get all missing numbers inside the array, from 1..N
+     *
+     * @param      array  $groups  The groups
+     *
+     * @return     array  The loners.
+     * @throws     \InvalidArgumentException  (description)
+     */
+    public function getMissingLink($suspect = array())
     {
         if (empty($suspect)) {
             return array();
@@ -91,12 +125,21 @@ class Solutions
             return $missings[0];
         }
 
-        // having mercy to support multiple missing links
+        // NOT ON THE REQUIRMENTS BUT STILL SUPPORTED MULTIPLE MISSING
         return $missings;
     }
 
-    // solution 3
-    public function findLoners($groups = array())
+    /**
+     * Solution 3
+     *
+     * Get all un-paired numbers inside the array
+     *
+     * @param      array  $groups  The groups
+     *
+     * @return     array  The loners.
+     * @throws     \InvalidArgumentException  Invalid number | Invalid odd number
+     */
+    public function getLoners($groups = array())
     {
         $loners = array();
 
@@ -131,6 +174,54 @@ class Solutions
         }
 
 
+        // NOT ON THE REQUIRMENTS BUT STILL SUPPORTED MULTIPLE UNPAIRED
         return $loners;
+    }
+
+    /**
+     * Gets the most least characters.
+     *
+     * @param      string  $word   The word
+     *
+     * @return     array  The most least characters.
+     */
+    public function getMostLeastCharacters($word = '')
+    {
+        /**
+         * Break into pieaces.
+         * https://www.php.net/manual/en/function.str-split.php
+         */
+        $characters = str_split($word);
+
+        /**
+         * Count all duplicated
+         * https://www.php.net/manual/en/function.array-count-values.php
+         */
+        $character_counts = array_count_values($characters);
+        $most_count = max($character_counts);
+        $least_count = 1;
+        $most_characters = array();
+        $least_characters = array();
+
+        // get all most characters
+        foreach ($character_counts as $character => $count) {
+            if ($count == $most_count) {
+                $most_characters[] = $character;
+            }
+            if ($count == $least_count) {
+                $least_characters[] = $character;
+            }
+        }
+
+        $result = array();
+        $result['most_characters'] = $most_characters;
+        $result['biggest_most_character'] = max($most_characters);
+        $result['most_count'] = $most_count;
+        $result['least_characters'] = $least_characters;
+        $result['biggest_least_character'] = max($least_characters);
+
+        print_r($result);
+
+        return $result;
     }
 }
