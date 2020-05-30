@@ -24,7 +24,7 @@ _Note: There is already JWT authentication implemented for the app._
 
 **TODO:** The application should show solutions regarding on the requirements below
 
-Requirements in : `requirements/Senior Backend Developer Assessment.pdf` 
+Requirements in : `requirements/Senior Backend Developer Assessment.pdf`
 
 ## Setup
 
@@ -55,19 +55,6 @@ UNITTEST  : packages\jslmariano\aiodin\tests\AiodinFunctionTest.php
 cp .env.example .env
 ```
 
-**Modify .env for MySQL**
-
-```
-
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=default
-DB_USERNAME=default
-DB_PASSWORD=secret
-
-```
-
 **Copy Laradock environment files**
 
 ```
@@ -78,9 +65,9 @@ cp env-example .env
 
 
 **Run docker containers**
-
+((recommended) if w/o database)
 ```
-docker-compose up -d nginx mysql phpmyadmin redis workspace
+docker-compose up -d nginx workspace
 ```
 
 **Enter workspace container**
@@ -90,7 +77,7 @@ docker-compose exec --user=laradock workspace bash
 ```
 
 **Install dependencies and build existing database**
-
+((recommended) if w/o database)
 ```
 rm -rf vendor
 rm -rf composer.lock
@@ -99,20 +86,6 @@ composer dump-autoload
 npm install --no-bin-links
 npm install cross-env --no-bin-links
 php artisan key:generate
-php artisan migrate
-```
-
-**Build app**
-
-```
-npm run watch
-```
-
-**Refresh jslmariano/aiodin package after code modifications**
-
-```
-rm -rf vendor/jslmariano
-composer update jslmariano/aiodin
 ```
 
 **Testing the custom package**
@@ -121,9 +94,13 @@ composer update jslmariano/aiodin
 phpunit  packages/jslmariano/aiodin
 ```
 
+**Refresh jslmariano/aiodin package IF after code modifications**
 
-The application should now be available at http://localhost
+```
+rm -rf vendor/jslmariano
+composer update jslmariano/aiodin
+```
 
 ## Technical Question
 
-You can reach me at SKYPE EMAIL : sel@jslmariano.com 
+You can reach me at SKYPE EMAIL : sel@jslmariano.com
