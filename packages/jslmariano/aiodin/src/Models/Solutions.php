@@ -5,6 +5,34 @@ namespace Jslmariano\Aiodin\Models;
 class Solutions
 {
 
+    protected function _validateNumbers($numbers = array())
+    {
+        foreach($numbers as $value){
+            if( ! is_int($value)){
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        '"%s" is not a valid number inside your array',
+                        $value
+                    )
+                );
+            }
+        }
+    }
+
+    protected function _validateOddNumbers($numbers = array())
+    {
+        foreach($numbers as $value){
+            if((int)$value % 2 == 0) {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        '"%s" is not a valid odd number inside your array',
+                        $value
+                    )
+                );
+            }
+        }
+    }
+
     // solution 1
     public function countBinaryGap($n = 0)
     {
@@ -45,16 +73,7 @@ class Solutions
         $max_number = max($suspect);
         $missings   = array();
 
-        foreach($suspect as $value){
-            if( ! is_int($value)){
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        '"%s" is not a valid number inside your array',
-                        $value
-                    )
-                );
-            }
-        }
+        $this->_validateNumbers($suspect);
 
         // loop and get all the missing numbers
         for ($i = $min_number; $i <= $max_number; $i++) {
@@ -74,5 +93,44 @@ class Solutions
 
         // having mercy to support multiple missing links
         return $missings;
+    }
+
+    // solution 3
+    public function findLoners($groups = array())
+    {
+        $loners = array();
+
+        // clean out groups
+        $groups = array_filter($groups);
+
+        // make sure we got all integer
+        $this->_validateNumbers($groups);
+
+        // make sure we got all odd integer
+        $this->_validateOddNumbers($groups);
+
+        /**
+         * Count all duplicates
+         * https://www.php.net/manual/en/function.array-count-values.php
+         */
+        $group_counts = array_count_values($groups);
+
+        // now get all non-duplicates
+        foreach ($group_counts as $number => $count) {
+            if ($count == 1) {
+                $loners[] = $number;
+            }
+        }
+
+        if (empty($loners)) {
+            return array();
+        }
+
+        if (count($loners) == 1) {
+            return $loners[0];
+        }
+
+
+        return $loners;
     }
 }

@@ -83,4 +83,68 @@ class AiodinFunctionTest extends TestCase
         $result = $this->solution->findMissingLink(array(2,3,'oops',5));
     }
 
+    protected function _generateOddNumbers($max = 1000000, $skip_numbers = array())
+    {
+        $odd_numbers = array();
+        for ($i = 0; $i <= $max ; $i++) {
+            if (in_array($i, $skip_numbers)) {
+                continue;
+            }
+            if((int)$i % 2 != 0) {
+                $odd_numbers[] = $i;
+            }
+        }
+        return $odd_numbers;
+    }
+
+
+    /**
+     * Test for solution 3
+     * @return void
+     */
+    public function testSolution3()
+    {
+        // valid inputs
+        $result = $this->solution->findLoners(array(9,3,9,3,9,7,9));
+        $this->assertEquals(7, $result);
+
+        // test with some zeros
+        $result = $this->solution->findLoners(array(9,3,9,3,9,7,9,0,0,9));
+        $this->assertEquals(7, $result);
+
+        // test multiple single numbers w/o pair
+        $result = $this->solution->findLoners(array(9,3,9,3,9,7,9,1,9));
+        $this->assertEquals(array(7,1), $result);
+
+        /**
+         * promgrammatically create set of arrays with duplicate with one
+         * un-paired element, in this test it is number 3
+         */
+        $setA    = $this->_generateOddNumbers(10000, array(3)); // 10000 numbers w/o 3
+        $setB    = $this->_generateOddNumbers(10000); // 10000 numbers w/ 3
+        $numbers = array_merge($setA, $setB);
+        $result = $this->solution->findLoners($numbers);
+        $this->assertEquals(3, $result);
+
+        /**
+         * promgrammatically create set of arrays with duplicate with one
+         * un-paired element, in this test it is number 100, a little slow
+         * beause of looping and large arrays
+         */
+        $setA    = $this->_generateOddNumbers(100000000, array(100)); // 10000 numbers w/o 100
+        $setB    = $this->_generateOddNumbers(100000000, array(100)); // 10000 numbers w/o 100
+        $setC    = $this->_generateOddNumbers(100000000); // 10000 numbers w/ 3
+        $numbers = array_merge($setA, $setB, $setC);
+        $result = $this->solution->findLoners($numbers);
+        $this->assertEquals(100, $result);
+
+        // test not odd mixed in array
+        $this->expectException(\InvalidArgumentException::class);
+        $result = $this->solution->findLoners(array(9,10));
+
+        // test not integer mixed in array
+        $this->expectException(\InvalidArgumentException::class);
+        $result = $this->solution->findLoners(array(2,3,'oops',5));
+    }
+
 }
