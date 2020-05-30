@@ -1,0 +1,35 @@
+{
+    "name": "jslmariano/notelist",
+    "description": "You can create a list of your notes.",
+    "authors": [
+        {
+            "name": "Josel Mariano",
+            "email": "jslmariano@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "^7.5",
+        "laravel/laravel": "dev-develop"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jslmariano\\Notelist\\Providers\\NotesServiceProvider",
+                "Jslmariano\\Notelist\\Providers\\NoteRoutesProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Jslmariano\\Notelist\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    }
+}
