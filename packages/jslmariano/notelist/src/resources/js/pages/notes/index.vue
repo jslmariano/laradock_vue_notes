@@ -14,36 +14,38 @@
             </div>
             <hr/>
         </div>
-        <div class="row">
-            <div class="col-sm-4 py-2" v-for="note in notes.notes" :key="note.id">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            [ {{ note.id }} ] - {{ note.title }}
-                        </h5>
-                        <p class="card-text">
-                            {{ note.short_content }}
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-sm btn-primary pull-left" role="button"
-                            v-on:click="viewNote(note.id)"
-                            >
-                            <fa icon="eye" fixed-width />
-                        </button>
-                        <router-link class="btn btn-sm btn-info pull-left" role="button"
-                            :to="{ name: 'note.edit', params: {id: note.id } }"
-                            >
-                            <fa icon="pencil-alt" fixed-width />
-                        </router-link>
-                        <button class="btn btn-sm btn-danger pull-left" role="button"
-                            v-on:click="deleteNote(note.id)" >
-                            <fa icon="trash-alt" fixed-width />
-                        </button>
-                        <br/>
-                        <small class="text-muted">
-                            Last updated 3 mins ago
-                        </small>
+        <div class="container notes-container">
+            <div class="row">
+                <div class="col-sm-4 py-2" v-for="note in notes.notes" :key="note.id">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                [ {{ note.id }} ] - {{ note.title }}
+                            </h5>
+                            <p class="card-text">
+                                {{ note.short_content }}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-primary pull-left" role="button"
+                                v-on:click="viewNote(note.id)"
+                                >
+                                <fa icon="eye" fixed-width />
+                            </button>
+                            <router-link class="btn btn-sm btn-info pull-left" role="button"
+                                :to="{ name: 'note.edit', params: {id: note.id } }"
+                                >
+                                <fa icon="pencil-alt" fixed-width />
+                            </router-link>
+                            <button class="btn btn-sm btn-danger pull-left" role="button"
+                                v-on:click="deleteNote(note.id)" >
+                                <fa icon="trash-alt" fixed-width />
+                            </button>
+                            <br/>
+                            <small class="text-muted">
+                                Last updated 3 mins ago
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
