@@ -6,7 +6,7 @@
                     Notes
                 </router-link>
                 <h3 class="text-center">
-                    Edit Note
+                    Create Note
                 </h3>
             </div>
             <div class="alert alert-danger hide hidden" role="alert" style="display: none;">
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <form @submit.prevent="updateNote">
+                    <form @submit.prevent="addNote">
                         <div class="form-group">
                             <label>
                                 Title
@@ -33,7 +33,7 @@
                             </textarea>
                         </div>
                         <button class="btn btn-primary" type="submit">
-                            Update Note
+                            Add Note
                         </button>
                     </form>
                 </div>
@@ -42,29 +42,18 @@
     </div>
 </template>
 <script>
-    import axios from 'axios';
-    export default {
-        data() {
-            return {
-                note: {}
-            }
-        },
-        created() {
-            axios
-                .get(`http://localhost/api/note/edit/${this.$route.params.id}`)
-                .then((response) => {
-                    this.note = response.data;
-                    // console.log(response.data);
-                });
-        },
-        methods: {
-            updateNote() {
-                axios
-                    .put(`http://localhost/api/note/update/${this.$route.params.id}`, this.note)
-                    .then((response) => {
-                        this.$router.push({name: 'notes'});
-                    });
-            }
+export default {
+    data() {
+        return {
+            note: {}
         }
+    },
+    methods: {
+        addNote() {
+            this.$store.dispatch("notes/createNote", this.note);
+            this.$router.push({name: 'notes'});
+        },
+
     }
+}
 </script>

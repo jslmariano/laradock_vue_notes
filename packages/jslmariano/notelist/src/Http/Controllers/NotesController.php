@@ -4,6 +4,8 @@ namespace Jslmariano\Notelist\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Jslmariano\Notelist\Http\Requests\NotesStoreRequest;
 use Jslmariano\Notelist\Models\Notes;
 
 class NotesController extends Controller
@@ -19,8 +21,11 @@ class NotesController extends Controller
         return array_reverse($notes);
     }
 
-    public function store(Request $request)
+    public function store(NotesStoreRequest $request)
     {
+
+        $validated = $request->validated();
+
         $note = new Notes([
             'title'   => $request->input('title'),
             'content' => $request->input('content'),

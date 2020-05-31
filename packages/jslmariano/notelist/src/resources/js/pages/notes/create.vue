@@ -1,52 +1,66 @@
 <template>
-    <div>
-        <h3 class="text-center">
-            Add Note
-        </h3>
-        <div class="row">
-            <div class="col-md-6">
-                <form @submit.prevent="addNote">
-                    <div class="form-group">
-                        <label>
-                            Title
-                        </label>
-                        <input class="form-control" type="text" v-model="note.title">
-                        </input>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Content
-                        </label>
-                        <textarea class="form-control" v-model="note.content">
-                        </textarea>
-                    </div>
-                    <button class="btn btn-primary" type="submit">
-                        Add Note
-                    </button>
-                </form>
+  <div class="row">
+    <div class="col-lg-8 m-auto">
+      <card title="Create Note">
+        <form @submit.prevent="create" @keydown="form.onKeydown($event)">
+          <!-- Email -->
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-md-right">Title</label>
+            <div class="col-md-7">
+              <input v-model="form.title" :class="{ 'is-invalid': form.errors.has('title') }" class="form-control" type="text" name="title">
+              <has-error :form="form" field="title" />
             </div>
-        </div>
-    </div>
-</template>
-<script>
-    export default {
-        data() {
-            return {
-                note: {}
-            }
-        },
-        methods: {
-            addNote() {
+          </div>
 
-                this.axios
-                    .post('http://localhost/api/note/store', this.note)
-                    .then(response => (
-                        this.$router.push({name: 'notes'})
-                        // console.log(response.data)
-                    ))
-                    .catch(error => console.log(error))
-                    .finally(() => this.loading = false)
-            }
-        }
+          <!-- Password -->
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-md-right">Content</label>
+            <div class="col-md-7">
+              <textarea v-model="form.content" :class="{ 'is-invalid': form.errors.has('content') }" class="form-control" type="text" name="content">
+              </textarea>
+              <has-error :form="form" field="content" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-7 offset-md-3 d-flex">
+              <!-- Submit Button -->
+              <v-button :loading="form.busy">
+                Create Note
+              </v-button>
+
+            </div>
+          </div>
+        </form>
+      </card>
+    </div>
+  </div>
+</template>
+
+<script>
+import Form from 'vform'
+
+export default {
+
+  metaInfo () {
+    return { title: "Create Note" }
+  },
+
+  data: () => ({
+    form: new Form({
+      title: '',
+      content: ''
+    })
+  }),
+
+  methods: {
+    async create () {
+      // Submit the form.
+      const { data } = await this.form.post('/api/note/store')
+
+      // Redirect notes.
+      this.$router.push({ name: 'notes' })
     }
+  }
+}
 </script>
