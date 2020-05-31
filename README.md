@@ -79,8 +79,9 @@ docker-compose exec --user=laradock workspace bash
 rm -rf vendor
 rm -rf composer.lock
 composer install
+composer require jslmariano/notelist
 composer dump-autoload
-php artisan vendor:publish --tag="jslmariano\notelist\Providers\NotesServiceProvider"
+php artisan vendor:publish --provider="Jslmariano\Notelist\Providers\NotesServiceProvider"
 npm install --no-bin-links
 npm install cross-env --no-bin-links
 php artisan key:generate

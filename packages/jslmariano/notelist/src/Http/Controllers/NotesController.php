@@ -8,21 +8,18 @@ use Jslmariano\Notelist\Models\Notes;
 
 class NotesController extends Controller
 {
-    // test notes
     public function test()
     {
         return response()->json(array('message' => 'The note api successfully visible'));
     }
 
-    // all notes
     public function index()
     {
         $notes = Notes::all()->toArray();
         return array_reverse($notes);
     }
 
-    // add note
-    public function add(Request $request)
+    public function store(Request $request)
     {
         $note = new Notes([
             'title'   => $request->input('title'),
@@ -33,14 +30,12 @@ class NotesController extends Controller
         return response()->json('The note successfully added');
     }
 
-    // edit note
     public function edit($id)
     {
         $note = Notes::find($id);
         return response()->json($note);
     }
 
-    // update note
     public function update($id, Request $request)
     {
         $note = Notes::find($id);
@@ -49,10 +44,14 @@ class NotesController extends Controller
         return response()->json('The note successfully updated');
     }
 
-    // delete note
     public function delete($id)
     {
         $note = Notes::find($id);
+
+        if (is_null($note)) {
+            return response()->json('The note already deleted');
+        }
+
         $note->delete();
 
         return response()->json('The note successfully deleted');

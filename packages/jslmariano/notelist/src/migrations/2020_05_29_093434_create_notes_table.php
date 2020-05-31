@@ -16,10 +16,12 @@ class CreateNotesTable extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->default('Untitled');
-            $table->string('content')->default('');
+            $table->string('content', 512)->default('');
+            $table->string('short_content', 256)->default('');
             $table->string('created_user')->default('');
             $table->string('updated_user')->default('');
-            $table->timestamps();
+            $table->datetime('created_at');
+            $table->datetime('updated_at');
         });
     }
 
