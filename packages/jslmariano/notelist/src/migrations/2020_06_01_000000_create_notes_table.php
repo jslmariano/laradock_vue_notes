@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * This class describes a create notes table.
+ */
 class CreateNotesTable extends Migration
 {
     /**
@@ -18,8 +21,8 @@ class CreateNotesTable extends Migration
             $table->string('title')->default('Untitled');
             $table->string('content', 512)->default('');
             $table->string('short_content', 256)->default('');
-            $table->string('created_user')->default('');
-            $table->string('updated_user')->default('');
+            $table->bigInteger('created_user')->default(0);
+            $table->bigInteger('updated_user')->default(0);
             $table->datetime('created_at');
             $table->datetime('updated_at');
         });

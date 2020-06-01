@@ -4,6 +4,10 @@ namespace Jslmariano\Notelist\Http\Requests;
 
 use Jslmariano\Notelist\Http\Requests\Api\ApiFormRequest;
 
+/**
+ * This class describes a notes store request.
+ * Containes all the validation rules for notes
+ */
 class NotesStoreRequest extends ApiFormRequest
 {
     /**
@@ -25,7 +29,7 @@ class NotesStoreRequest extends ApiFormRequest
     {
         return [
             'title' => 'required|string|max:50',
-            'content' => 'required|string|max:250',
+            'content' => 'required|string|max:500',
         ];
     }
 

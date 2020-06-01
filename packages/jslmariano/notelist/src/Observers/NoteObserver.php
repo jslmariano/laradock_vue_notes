@@ -4,6 +4,9 @@ namespace Jslmariano\Notelist\Observers;
 
 use Jslmariano\Notelist\Models\Notes;
 
+/**
+ * Interface to be notified of a note changes.
+ */
 class NoteObserver
 {
     /**
@@ -15,6 +18,8 @@ class NoteObserver
     public function creating(Notes $notes)
     {
         $notes->short_content = str_limit($notes->content, 30, '...');
+        $notes->created_user = \Auth::user()->id;
+        $notes->updated_user = \Auth::user()->id;
     }
 
     /**
@@ -26,5 +31,6 @@ class NoteObserver
     public function updating(Notes $notes)
     {
         $notes->short_content = str_limit($notes->content, 30, '...');
+        $notes->updated_user = \Auth::user()->id;
     }
 }
