@@ -20,7 +20,7 @@ class NotesController extends Controller
      */
     public function test()
     {
-        return response()->json(array('message' => 'The note api successfully visible'));
+        return array('message' => 'The note api successfully visible');
     }
 
     /**
@@ -52,7 +52,10 @@ class NotesController extends Controller
         ]);
         $note->save();
 
-        return response()->json(array('message' => 'The note successfully added'));
+        return array(
+            'message' => 'The note successfully added',
+            'note' => $note
+        );
     }
 
     /**
@@ -65,7 +68,7 @@ class NotesController extends Controller
     public function edit($id)
     {
         $note = Notes::find($id);
-        return response()->json($note);
+        return $note;
     }
 
     /**
@@ -83,7 +86,10 @@ class NotesController extends Controller
         $note = Notes::find($id);
         $note->update($request->all());
 
-        return response()->json(array('message' => 'The note successfully updated'));
+        return array(
+            'message' => 'The note successfully updated',
+            'note' => $note
+        );
     }
 
     /**
@@ -98,10 +104,10 @@ class NotesController extends Controller
         $note = Notes::find($id);
 
         if (is_null($note)) {
-            return response()->json(array('message' => 'The note already deleted'));
+            return array('message' => 'The note already deleted');
         }
 
         $note->delete();
-        return response()->json(array('message' => 'The note successfully deleted'));
+        return array('message' => 'The note successfully deleted');
     }
 }

@@ -32,14 +32,6 @@ class NotesServiceProvider extends ServiceProvider
         Notes::observe(
             NoteObserver::class
         );
-
-        /**
-        * Do not forget to import them before using!
-        */
-        $this->app->bind(
-            ExceptionHandler::class,
-            RestApiHandler::class
-        );
     }
 
    /**
