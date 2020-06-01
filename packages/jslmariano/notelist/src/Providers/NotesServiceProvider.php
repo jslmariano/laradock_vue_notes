@@ -4,12 +4,24 @@ namespace Jslmariano\Notelist\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+
 use Jslmariano\Notelist\Observers\NoteObserver;
 use Jslmariano\Notelist\Models\Notes;
+use Jslmariano\Notelist\Exceptions\RestApiHandler;
 
+
+/**
+ * This class describes a notes service provider.
+ */
 class NotesServiceProvider extends ServiceProvider
 {
 
+   /**
+     * Hanldes package publish construct.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
@@ -19,6 +31,14 @@ class NotesServiceProvider extends ServiceProvider
 
         Notes::observe(
             NoteObserver::class
+        );
+
+        /**
+        * Do not forget to import them before using!
+        */
+        $this->app->bind(
+            ExceptionHandler::class,
+            RestApiHandler::class
         );
     }
 
