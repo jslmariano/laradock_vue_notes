@@ -1,70 +1,109 @@
 <template>
     <div class="row">
         <div class="container">
-            <div class="page-header">
-                <router-link class="btn btn-primary pull-left" role="button" to="/notes">
-                    Notes
-                </router-link>
-                <h3 class="text-center">
-                    Edit Note
-                </h3>
-            </div>
-            <div class="alert alert-danger hide hidden" role="alert" style="display: none;">
-                No results
-            </div>
-            <hr/>
-        </div>
-        <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <form @submit.prevent="updateNote">
-                        <div class="form-group">
-                            <label>
-                                Title
-                            </label>
-                            <input class="form-control" type="text" v-model="note.title">
-                            </input>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Content
-                            </label>
-                            <textarea class="form-control" v-model="note.content">
-                            </textarea>
-                        </div>
-                        <button class="btn btn-primary" type="submit">
-                            Update Note
-                        </button>
-                    </form>
+                <router-link class="btn btn-primary pull-left" role="button" to="/note/create">
+                    Create
+                </router-link>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 m-auto">
+                    <card title="Update Note">
+                        <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+
+                            <!-- Email -->
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label text-md-right">Title</label>
+                                <div class="col-md-7">
+                                    <input v-model="form.title" :class="{ 'is-invalid': form.errors.has('title') }" class="form-control" type="text" name="title" :disabled="loading == 1" />
+                                    <small class="text-muted" >
+                                        Max of 50 characters
+                                    </small>
+                                    <has-error :form="form" field="title" />
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label text-md-right">Content</label>
+                                <div class="col-md-7">
+                                    <textarea v-model="form.content" :class="{ 'is-invalid': form.errors.has('content') }" class="form-control" type="text" name="content" :disabled="loading == 1">
+                                    </textarea>
+                                    <small class="text-muted" >
+                                        Max of 500 characters
+                                    </small>
+                                    <has-error :form="form" field="content" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-7 offset-md-3 d-flex">
+                                    <!-- Submit Button -->
+                                    <v-button :loading="form.busy">
+                                        Update Note
+                                    </v-button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </card>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script>
-    import axios from 'axios';
-    export default {
-        data() {
-            return {
-                note: {}
-            }
-        },
-        created() {
-            axios
-                .get(`http://localhost/api/note/edit/${this.$route.params.id}`)
-                .then((response) => {
-                    this.note = response.data;
-                    // console.log(response.data);
-                });
-        },
-        methods: {
-            updateNote() {
-                axios
-                    .put(`http://localhost/api/note/update/${this.$route.params.id}`, this.note)
-                    .then((response) => {
-                        this.$router.push({name: 'notes'});
-                    });
-            }
+import Form from 'vform'
+import { mapGetters } from "vuex";
+
+export default {
+
+    metaInfo () {
+        return { title: "Update Note" }
+    },
+
+    data: () => ({
+        loading: 0,
+        form: new Form({
+          title: '',
+          content: ''
+        })
+    }),
+
+    mounted () {
+        this.$loading = this.$refs.loading
+    },
+
+    computed: mapGetters({
+        note: "notes/current_note"
+    }),
+
+    async created () {
+        this.loading = 1;
+        this.$router.app.$loading.start();
+        // Fetch the note.
+        await this.$store.dispatch('notes/fetchSingleNote', this.$route.params.id)
+
+        // Fill the form with note data.
+        this.form.keys().forEach(key => {
+            this.form[key] = this.note[key];
+        });
+        this.loading = 0;
+        this.$router.app.$loading.finish();
+    },
+
+    methods: {
+        async update () {
+
+            this.$router.app.$loading.start();
+            // Submit the form.
+            const { data } = await this.form.put(`/api/note/update/${this.$route.params.id}`)
+
+            this.$router.app.$loading.finish();
+            // Redirect notes.
+            this.$router.push({ name: 'notes' })
         }
     }
+}
 </script>
