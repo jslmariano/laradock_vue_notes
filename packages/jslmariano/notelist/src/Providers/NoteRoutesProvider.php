@@ -5,6 +5,8 @@ namespace Jslmariano\Notelist\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+use Jslmariano\Notelist\Http\Middleware\JsonMiddleware;
+
 /**
  * This class describes a note routes provider.
  */
@@ -41,8 +43,12 @@ class NoteRoutesProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
+        $middlewares = array();
+        $middlewares[] = JsonMiddleware::class;
+        $middlewares[] = 'auth:api';
+        $middlewares[] = 'api';
         Route::prefix('api')
-            ->middleware(['api','auth:api'])
+            ->middleware($middlewares)
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../Routes/api.php');
     }
