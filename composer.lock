@@ -676,7 +676,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/jslmariano/notelist",
-                "reference": "772c7c3a661a1ef7b013d7b6dc51916098b7159f"
+                "reference": "5aee79db38de660f8b6a51582f86783651e493e0"
             },
             "require-dev": {
                 "laravel/laravel": "dev-develop",
@@ -699,7 +699,7 @@
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Tests\\": "tests"
+                    "Jslmariano\\Notelist\\Tests\\": "tests"
                 }
             },
             "authors": [

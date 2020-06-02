@@ -41,13 +41,12 @@
                                 >
                                 <fa icon="eye" fixed-width />
                             </button>
-                            <router-link class="btn btn-sm btn-info pull-left" :disabled="user.id != note.created_user" role="button"
+                            <router-link class="btn btn-sm btn-info pull-left"  role="button"
                                 :to="{ name: 'note.edit', params: {id: note.id } }"
                                 >
                                 <fa icon="pencil-alt" fixed-width />
                             </router-link>
-                            <button :loading="note.busy" class="btn btn-sm btn-danger pull-left" role="button"
-                                 :disabled="((user.id != note.created_user) || note.busy)" v-on:click="deleteNote(note.id)" >
+                            <button :loading="note.busy" class="btn btn-sm btn-danger pull-left" role="button" v-on:click="deleteNote(note.id)" >
                                 <fa icon="trash-alt" fixed-width />
                             </button>
                         </div>

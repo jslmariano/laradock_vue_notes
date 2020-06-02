@@ -99,7 +99,12 @@ npm run watch
 ```
 rm -rf vendor/jslmariano
 composer update jslmariano/notelist
+rm -rf resources/js/pages/notes
+rm -rf resources/js/store/modules/notes.js
 php artisan vendor:publish --provider="Jslmariano\Notelist\Providers\NotesServiceProvider"
+
+# IF modified a page vue file
+npm run watch
 ```
 
 **Testing the custom package**
