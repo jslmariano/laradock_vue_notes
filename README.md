@@ -99,6 +99,7 @@ npm run watch
 ```
 rm -rf vendor/jslmariano
 composer update jslmariano/notelist
+php artisan vendor:publish --provider="Jslmariano\Notelist\Providers\NotesServiceProvider"
 ```
 
 **Testing the custom package**
