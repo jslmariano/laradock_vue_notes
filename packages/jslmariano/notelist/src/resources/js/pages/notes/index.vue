@@ -41,13 +41,13 @@
                                 >
                                 <fa icon="eye" fixed-width />
                             </button>
-                            <router-link class="btn btn-sm btn-info pull-left" :disabled="user.id === note.created_user" role="button"
+                            <router-link class="btn btn-sm btn-info pull-left" :disabled="user.id != note.created_user" role="button"
                                 :to="{ name: 'note.edit', params: {id: note.id } }"
                                 >
                                 <fa icon="pencil-alt" fixed-width />
                             </router-link>
-                            <button class="btn btn-sm btn-danger pull-left" role="button"
-                                 :disabled="user.id === note.created_user" v-on:click="deleteNote(note.id)" >
+                            <button :loading="note.busy" class="btn btn-sm btn-danger pull-left" role="button"
+                                 :disabled="((user.id != note.created_user) || note.busy)" v-on:click="deleteNote(note.id)" >
                                 <fa icon="trash-alt" fixed-width />
                             </button>
                         </div>
@@ -83,7 +83,11 @@ export default {
     methods: {
 
         deleteNote : function(id) {
-            if(confirm("Do you really want to delete?")){
+            var deletables = this.notes.notes.filter(obj => obj.id === id);
+            if(confirm("Do you really want to delete?")) {
+                if (deletables.length) {
+                    deletables[0].busy = 1;
+                }
                 console.log('deleteNote', id);
                 this.$store.dispatch("notes/deleteNote", id);
             }
