@@ -94,7 +94,7 @@ php artisan migrate
 npm run watch
 ```
 
-**Refresh jslmariano/notelist package after code modifications**
+**Refresh jslmariano/notelist package (IF THERE) after code modifications**
 
 ```
 rm -rf vendor/jslmariano
@@ -104,7 +104,7 @@ composer update jslmariano/notelist
 **Testing the custom package**
 
 ```
-phpunit  packages/jslmariano/notelist
+./vendor/bin/phpunit vendor/jslmariano/notelist/tests/
 ```
 
 
