@@ -1,11 +1,19 @@
 <template>
     <div class="row">
+
+        <!-- NAVIGATE BUTTON -->
         <div class="container">
-            <div class="row">
-                <router-link class="btn btn-primary pull-left" role="button" to="/note/create">
-                    Create
+            <div class="page-header">
+                <router-link class="btn btn-primary pull-left" role="button" to="/notes">
+                    Notes
                 </router-link>
+                <hr/>
             </div>
+        </div>
+        <!-- NAVIGATE BUTTON -->
+
+        <!-- FORM -->
+        <div class="container">
             <div class="row">
                 <div class="col-lg-8 m-auto">
                     <card title="Update Note">
@@ -50,6 +58,8 @@
                 </div>
             </div>
         </div>
+        <!-- FORM -->
+
     </div>
 </template>
 
