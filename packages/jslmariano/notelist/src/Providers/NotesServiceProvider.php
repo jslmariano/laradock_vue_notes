@@ -29,6 +29,9 @@ class NotesServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/' => base_path('resources'),
         ]);
 
+        $this->app->make('Illuminate\Database\Eloquent\Factory')
+                    ->load(__DIR__ . '/../factories');
+
         Notes::observe(
             NoteObserver::class
         );
