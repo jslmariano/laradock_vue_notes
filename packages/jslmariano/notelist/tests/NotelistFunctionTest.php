@@ -13,7 +13,8 @@ class NotelistFunctionTest extends TestCase
 
     protected $faker;
 
-    public function setUp() : void {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->faker = Factory::create();
     }
@@ -21,11 +22,87 @@ class NotelistFunctionTest extends TestCase
     public function loginWithFakeUser()
     {
         $user = new User([
-            'id' => 1,
-            'name' => 'paps'
+            'id'   => 1,
+            'name' => 'paps',
         ]);
 
-        $this->be($user);
+        $this->actingAs($user);
+        $this->withSession(['foo' => 'bar']);
+    }
+
+    public function testCanCreateNote()
+    {
+        $this->loginWithFakeUser();
+
+        $data = [
+            'title'   => $this->faker->lexify(str_repeat('?', 50)),
+            'content' => $this->faker->lexify(str_repeat('?', 500))
+        ];
+
+        $test_response = array(
+            "message" => "The note successfully added",
+            "note" => $data
+        );
+
+        $response = $this->post(route('notes.store'), $data);
+        $response->assertStatus(200);
+        $response->assertJson($test_response);
+    }
+
+    public function testCreateNoteValidations()
+    {
+        $this->loginWithFakeUser();
+
+
+        $data = [
+            'content' => $this->faker->lexify(str_repeat('?', 20))
+        ];
+
+        $response = $this->post(route('notes.store'), $data);
+        $response->assertStatus(422);
+        $response->assertJson(array(
+            "errors" => array(
+                "title" => array("Title is required!")
+            )
+        ));
+
+        $data = [
+            'title' => $this->faker->lexify(str_repeat('?', 20))
+        ];
+
+        $response = $this->post(route('notes.store'), $data);
+        $response->assertStatus(422);
+        $response->assertJson(array(
+            "errors" => array(
+                "content" => array("Content is required!")
+            )
+        ));
+
+        $data = [
+            'title'   => $this->faker->lexify(str_repeat('?', 50)),
+            'content' => $this->faker->lexify(str_repeat('?', 600))
+        ];
+
+        $response = $this->post(route('notes.store'), $data);
+        $response->assertStatus(422);
+        $response->assertJson(array(
+            "errors" => array(
+                "content" => array("The content may not be greater than 500 characters.")
+            )
+        ));
+
+        $data = [
+            'title'   => $this->faker->lexify(str_repeat('?', 101)),
+            'content' => $this->faker->lexify(str_repeat('?', 20))
+        ];
+
+        $response = $this->post(route('notes.store'), $data);
+        $response->assertStatus(422);
+        $response->assertJson(array(
+            "errors" => array(
+                "title" => array("The title may not be greater than 50 characters.")
+            )
+        ));
     }
 
     /**
@@ -39,7 +116,7 @@ class NotelistFunctionTest extends TestCase
         $this->get(route('notes.test'))
             ->assertStatus(200)
             ->assertJson(array(
-                'message' => 'The note api successfully visible'
+                'message' => 'The note api successfully visible',
             ));
 
         $this->assertTrue(true);
@@ -52,8 +129,8 @@ class NotelistFunctionTest extends TestCase
     public function testEndpointsUnauthenticated()
     {
         $data = array(
-            'message' => 'Unauthenticated.'
-         );
+            'message' => 'Unauthenticated.',
+        );
 
         $this->get(route('notes.test'))
             ->assertStatus(401)

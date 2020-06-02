@@ -21,8 +21,8 @@ class CreateNotesTable extends Migration
             $table->string('title')->default('Untitled');
             $table->string('content', 512)->default('');
             $table->string('short_content', 256)->default('');
-            $table->bigInteger('created_user')->default(0);
-            $table->bigInteger('updated_user')->default(0);
+            $table->bigInteger('created_user')->nullable()->default(0);
+            $table->bigInteger('updated_user')->nullable()->default(0);
             $table->datetime('created_at');
             $table->datetime('updated_at');
         });
